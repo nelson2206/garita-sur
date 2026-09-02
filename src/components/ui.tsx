@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import QRCode from 'qrcode';
+import { NavLink } from 'react-router-dom';
 import { useSesion } from '../lib/auth';
 import type { Semaforo } from '../lib/util';
 
@@ -21,6 +22,7 @@ export function Cabecera() {
       <header className="top">
         <div className="brand"><span className="sq">GS</span><h1>Garita Sur</h1></div>
         <span className="rol">{c?.nombre} · {perfil?.nombre}</span>
+        {perfil?.rol === 'admin' && <nav className="row" style={{ gap: 4 }}><NavLink to="/admin" className={({ isActive }) => 'btn sm ' + (isActive ? 'dark' : 'ghost')}>Administración</NavLink><NavLink to="/garita" className={({ isActive }) => 'btn sm ' + (isActive ? 'dark' : 'ghost')}>Garita</NavLink></nav>}
         <div className="der">
           <span className={'dot ' + (modo === 'nube' ? 'on' : 'off')} />{modo === 'nube' ? 'En la nube' : 'Modo demo'}
           <button className="btn sm ghost" onClick={() => salir()}>Salir</button>
