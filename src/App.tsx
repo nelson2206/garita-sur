@@ -13,7 +13,7 @@ export default function App() {
   const home = perfil?.rol === 'residente' ? '/residente' : perfil?.rol === 'vigilante' ? '/garita' : '/admin';
   const nav = useNavigate(); const anterior = useRef<string | null>(null);
   // Al iniciar sesión, cada rol aterriza en su pantalla; al cerrarla, vuelve al ingreso.
-  useEffect(() => { const actual = perfil?.id ?? null; if (actual !== anterior.current && !location.hash.startsWith('#/pase/')) nav('/', { replace: true }); anterior.current = actual; }, [perfil?.id, nav]);
+  useEffect(() => { const actual = perfil?.id ?? null; if (actual !== anterior.current && !location.hash.startsWith('#/pase/')) nav(actual ? home : '/', { replace: true }); anterior.current = actual; }, [perfil?.id, home, nav]);
   return (
     <Routes>
       <Route path="/pase/:codigo" element={<PasePublico />} />
