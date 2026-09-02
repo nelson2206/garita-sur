@@ -1,4 +1,4 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
+import type { RealtimePostgresChangesPayload, SupabaseClient } from '@supabase/supabase-js';
 import { DataProvider, type Row } from './provider';
 import type { Tabla } from '../types';
 import { uid } from '../util';
@@ -22,8 +22,8 @@ export class SupabaseProvider extends DataProvider {
     this.canal = this.sb.channel('garita-' + this.condominioId);
     for (const t of TABLAS) {
       const filter = t === 'condominios' ? `id=eq.${this.condominioId}` : `condominio_id=eq.${this.condominioId}`;
-      this.canal.on('postgres_changes', { event: '*', schema: 'public', table: t, filter }, (p: { eventType: string; new: Row; old: Row }) => {
-        if (p.eventType === 'DELETE') delete this.cache[t][p.old.id]; else this.cache[t][p.new.id] = p.new;
+      this.canal.on('postgres_changes', { event: '*', schema: 'public', table: t, filter }, (p: RealtimePostgresChangesPayload<Row>) => {
+        if (p.eventType === 'DELETE') delete this.cache[t][(p.old as Row).id]; else this.cache[t][(p.new as Row).id] = p.new as Row;
         this.emit();
       });
     }

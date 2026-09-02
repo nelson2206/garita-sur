@@ -3,7 +3,8 @@ import { useDatos } from '../lib/auth';
 import { Offline } from '../lib/offline';
 import { toast } from '../components/ui';
 import { EscanearModal, NoAnunciadoModal, ValidarModal } from './GaritaModales';
-import { BitacoraTurno, Busqueda, Dentro, Solicitudes } from './GaritaListas';
+import { Busqueda } from './GaritaBusqueda';
+import { BitacoraTurno, Dentro, Solicitudes } from './GaritaListas';
 
 export type ModalGarita = null | { k: 'scan' } | { k: 'validar'; codigo: string; foto: string } | { k: 'noanunciado'; unidadId?: string };
 
