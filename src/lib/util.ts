@@ -40,7 +40,10 @@ export function waText(p: Pase, u: Unidad | undefined, c: Condominio | undefined
 }
 const NL = String.fromCharCode(10);
 export const csv = (rows: (string | number | null | undefined)[][]) => rows.map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(',')).join(NL);
-export function descargar(nombre: string, contenido: string, tipo = 'text/csv') {
+export async function descargar(nombre: string, contenido: string, tipo = 'text/csv') {
+  // En la página publicada en claude.ai la descarga pasa por la capacidad "downloads"; en la app normal, por el navegador.
+  const runtime = (window as unknown as { claude?: { use(n: string): Promise<{ save(o: { filename: string; data: string }): Promise<void> } | null> } }).claude;
+  if (runtime) { try { const d = await runtime.use('downloads'); if (d) { await d.save({ filename: nombre, data: contenido }); return; } } catch { /* cancelado o no disponible */ } }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([String.fromCharCode(0xFEFF) + contenido], { type: tipo }));
   a.download = nombre; a.click();
