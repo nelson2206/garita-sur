@@ -6,7 +6,7 @@ const vacio = (): Cache => ({ condominios: {}, unidades: {}, vehiculos: {}, pase
 
 /** Capa de datos: mantiene una copia en memoria y avisa a la interfaz cuando cambia. */
 export abstract class DataProvider {
-  abstract modo: 'local' | 'nube';
+  abstract modo: 'local' | 'nube' | 'compartido';
   protected cache: Cache = vacio();
   private subs = new Set<() => void>();
   ready = false;

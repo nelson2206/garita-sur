@@ -32,7 +32,7 @@ export default function Admin() {
     <main className="grid" style={{ gap: 16 }}>
       <div className="row between">
         <div><span className="eyebrow">Administración</span><h2>{c?.nombre}</h2></div>
-        <div className="row"><button className="btn" onClick={exportar}>Exportar bitácora (CSV)</button>{modo === 'local' && <button className="btn ghost danger" onClick={() => { if (confirm('¿Reiniciar la demo con los datos de ejemplo?')) p.reset().then(() => toast('Demo reiniciada')); }}>Reiniciar demo</button>}</div>
+        <div className="row"><button className="btn" onClick={exportar}>Exportar bitácora (CSV)</button>{modo !== 'nube' && <button className="btn ghost danger" onClick={() => { if (confirm('¿Reiniciar la demo con los datos de ejemplo?')) p.reset().then(() => toast('Demo reiniciada')); }}>Reiniciar demo</button>}</div>
       </div>
       <div className="kpis">{kpis.map(([n, l]) => <div key={l} className="kpi"><span className="n">{n}</span><span className="l">{l}</span></div>)}</div>
       <div className="grid g2">

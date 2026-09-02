@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../lib/auth';
-import { LocalProvider } from '../lib/data/local';
+import { crearProviderDemo } from '../lib/data';
 import type { Pase, Unidad, Condominio } from '../lib/types';
 import { fmtDT } from '../lib/util';
 import { QrView } from '../components/ui';
@@ -21,7 +21,7 @@ export default function PasePublico() {
         const r = data[0];
         setV({ nombre: r.nombre, codigo: r.codigo, lote: r.lote, propietario: r.propietario, condominio: r.condominio, detalle: r.tipo === 'personal' ? `Horario ${r.hora_desde} a ${r.hora_hasta}.` : `Válido de ${fmtDT(r.desde)} a ${fmtDT(r.hasta)}. ${r.usos_max - r.usos} ingreso(s) disponible(s).` });
       } else {
-        const p = new LocalProvider(); await p.init();
+        const p = await crearProviderDemo();
         const pase = p.all<Pase>('pases').find(x => x.codigo === cod);
         if (!pase) { setV(null); return; }
         const u = p.get<Unidad>('unidades', pase.unidad_id); const c = p.condominio() as Condominio | undefined;

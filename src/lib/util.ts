@@ -34,7 +34,7 @@ export function validarPase(p: Pase | undefined): { ok: boolean; msg?: string } 
 }
 
 export const limpiarCodigo = (s: string) => (s || '').trim().toUpperCase().replace(/^GS:/, '');
-export const paseLink = (codigo: string) => `${location.origin}/pase/${codigo}`;
+export const paseLink = (codigo: string) => `${location.origin}${location.pathname}#/pase/${codigo}`;
 export function waText(p: Pase, u: Unidad | undefined, c: Condominio | undefined) {
   return `Hola ${p.nombre}, te invité a ${c?.nombre ?? 'mi condominio'} (${u?.lote ?? ''}). Muestra este código en la garita: ${p.codigo}. Válido de ${fmtDT(p.desde)} a ${fmtDT(p.hasta)}. Tu pase: ${paseLink(p.codigo)}`;
 }

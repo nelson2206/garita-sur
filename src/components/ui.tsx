@@ -24,7 +24,7 @@ export function Cabecera() {
         <span className="rol">{c?.nombre} · {perfil?.nombre}</span>
         {perfil?.rol === 'admin' && <nav className="row" style={{ gap: 4 }}><NavLink to="/admin" className={({ isActive }) => 'btn sm ' + (isActive ? 'dark' : 'ghost')}>Administración</NavLink><NavLink to="/garita" className={({ isActive }) => 'btn sm ' + (isActive ? 'dark' : 'ghost')}>Garita</NavLink></nav>}
         <div className="der">
-          <span className={'dot ' + (modo === 'nube' ? 'on' : 'off')} />{modo === 'nube' ? 'En la nube' : 'Modo demo'}
+          <span className={'dot ' + (modo === 'local' ? 'off' : 'on')} />{modo === 'nube' ? 'En la nube' : modo === 'compartido' ? 'Demo compartida' : 'Modo demo'}
           <button className="btn sm ghost" onClick={() => salir()}>Salir</button>
         </div>
       </header>

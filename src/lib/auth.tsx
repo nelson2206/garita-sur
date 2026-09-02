@@ -1,17 +1,18 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { DataProvider } from './data/provider';
-import { LocalProvider, CONDO_DEMO } from './data/local';
+import { CONDO_DEMO } from './data/local';
 import { SupabaseProvider } from './data/supabase';
+import { crearProviderDemo, ES_ARTIFACT } from './data';
 import type { Perfil, Rol } from './types';
 
 const URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 export const supabase: SupabaseClient | null = URL && KEY ? createClient(URL, KEY) : null;
-export const MODO: 'local' | 'nube' = supabase ? 'nube' : 'local';
+export const MODO: 'local' | 'nube' | 'compartido' = supabase ? 'nube' : ES_ARTIFACT ? 'compartido' : 'local';
 
 interface Sesion {
-  modo: 'local' | 'nube';
+  modo: 'local' | 'nube' | 'compartido';
   cargando: boolean;
   perfil: Perfil | null;
   provider: DataProvider | null;
@@ -44,9 +45,9 @@ export function SesionProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    if (MODO === 'local') {
+    if (MODO !== 'nube') {
       const guardado = localStorage.getItem(PERFIL_DEMO_KEY);
-      if (guardado) { const p = JSON.parse(guardado) as Perfil; const prov = new LocalProvider(); prov.init().then(() => { setPerfil(p); setProvider(prov); setCargando(false); }); }
+      if (guardado) { const p = JSON.parse(guardado) as Perfil; crearProviderDemo().then(prov => { setPerfil(p); setProvider(prov); setCargando(false); }); }
       else setCargando(false);
       return;
     }
@@ -63,8 +64,8 @@ export function SesionProvider({ children }: { children: ReactNode }) {
     entrarDemo(rol, unidadId) {
       const p: Perfil = { id: 'demo-' + rol, condominio_id: CONDO_DEMO, rol, nombre: rol === 'vigilante' ? 'Vigilante turno día' : rol === 'admin' ? 'Administración' : 'Propietario', unidad_id: unidadId || null };
       localStorage.setItem(PERFIL_DEMO_KEY, JSON.stringify(p));
-      const prov = new LocalProvider(); setCargando(true);
-      prov.init().then(() => { setPerfil(p); setProvider(prov); setCargando(false); });
+      setCargando(true);
+      crearProviderDemo().then(prov => { setPerfil(p); setProvider(prov); setCargando(false); });
     },
     async salir() { localStorage.removeItem(PERFIL_DEMO_KEY); if (supabase) await supabase.auth.signOut(); setPerfil(null); setProvider(null); },
   }), [cargando, perfil, provider, error]);

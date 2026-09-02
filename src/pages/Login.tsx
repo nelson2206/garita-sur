@@ -24,10 +24,10 @@ export default function Login() {
     <main className="login">
       <div className="stripe" />
       <div className="brand"><span className="sq" style={{ width: 34, height: 34 }}>GS</span><h2>Garita Sur</h2></div>
-      {modo === 'local' ? (
+      {modo !== 'nube' ? (
         <div className="card">
-          <span className="eyebrow">Modo demo</span>
-          <p className="small">No hay backend configurado: la app usa datos de ejemplo guardados en este navegador. Elige con qué rol entrar.</p>
+          <span className="eyebrow">{modo === 'compartido' ? 'Demo compartida' : 'Modo demo'}</span>
+          <p className="small">{modo === 'compartido' ? 'Los datos se comparten en tiempo real entre todos los que abren esta página. Elige con qué rol entrar: puedes abrirla en un celular como propietario y en una tablet como vigilante.' : 'No hay backend configurado: la app usa datos de ejemplo guardados en este navegador. Elige con qué rol entrar.'}</p>
           <label>Rol<select value={rol} onChange={e => setRol(e.target.value as Rol)}>
             <option value="residente">Propietario (celular)</option>
             <option value="vigilante">Vigilante (tablet de garita)</option>
@@ -35,7 +35,7 @@ export default function Login() {
           </select></label>
           {rol === 'residente' && <label>Lote<select value={unidad} onChange={e => setUnidad(e.target.value)}>{unidades.map(u => <option key={u.id} value={u.id}>{u.lote} · {u.propietario}</option>)}</select></label>}
           <button className="btn primary block" onClick={() => entrarDemo(rol, rol === 'residente' ? unidad : undefined)}>Entrar</button>
-          <p className="muted">Para conectar la base real, copia .env.example a .env con los datos de Supabase.</p>
+          {modo === 'local' && <p className="muted">Para conectar la base real, copia .env.example a .env con los datos de Supabase.</p>}
         </div>
       ) : (
         <div className="card">
