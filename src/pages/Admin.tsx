@@ -4,9 +4,15 @@ import type { Condominio, Evento, Pase, Solicitud, Unidad } from '../lib/types';
 import { csv, descargar, fmtDT } from '../lib/util';
 import { Foto, Plate, toast } from '../components/ui';
 import { Padron } from './AdminPadron';
+import { Usuarios } from './AdminUsuarios';
+import { Privacidad } from './AdminPrivacidad';
+
+type Seccion = 'resumen' | 'usuarios' | 'privacidad';
+const SECCIONES: [Seccion, string][] = [['resumen', 'Resumen y padrón'], ['usuarios', 'Usuarios'], ['privacidad', 'Privacidad']];
 
 export default function Admin() {
   const { modo } = useSesion(); const p = useDatos();
+  const [seccion, setSeccion] = useState<Seccion>('resumen');
   const c = p.condominio() as Condominio | undefined;
   const [cfg, setCfg] = useState({ regla: c?.regla_morosidad || 'informar', acuerdo: c?.acuerdo || '', retencion: String(c?.retencion_dias || 30) });
   const unidad = (id?: string | null) => p.get<Unidad>('unidades', id);
@@ -25,7 +31,7 @@ export default function Admin() {
     await p.upsert('condominios', { ...c, regla_morosidad: cfg.regla, acuerdo: cfg.acuerdo, retencion_dias: +cfg.retencion || 30 }); toast('Reglas guardadas. La garita ya las aplica.');
   }
   function exportar() {
-    const rows = [['fecha_hora', 'evento', 'persona', 'placa', 'lote', 'medio', 'autorizo', 'sincronizado'], ...[...bit].reverse().map(b => [b.ts, b.tipo, b.nombre, b.placa, unidad(b.unidad_id)?.lote, b.medio, b.autorizo, b.sincronizado === false ? 'no' : 'si'])];
+    const rows = [['fecha_hora', 'evento', 'persona', 'placa', 'lote', 'medio', 'autorizo', 'vigilante', 'sincronizado'], ...[...bit].reverse().map(b => [b.ts, b.tipo, b.nombre, b.placa, unidad(b.unidad_id)?.lote, b.medio, b.autorizo, b.vigilante, b.sincronizado === false ? 'no' : 'si'])];
     descargar(`bitacora-${new Date().toISOString().slice(0, 10)}.csv`, csv(rows));
   }
   return (
@@ -34,6 +40,10 @@ export default function Admin() {
         <div><span className="eyebrow">Administración</span><h2>{c?.nombre}</h2></div>
         <div className="row"><button className="btn" onClick={exportar}>Exportar bitácora (CSV)</button>{modo !== 'nube' && <button className="btn ghost danger" onClick={() => { if (confirm('¿Reiniciar la demo con los datos de ejemplo?')) p.reset().then(() => toast('Demo reiniciada')); }}>Reiniciar demo</button>}</div>
       </div>
+      <div className="pestanas">{SECCIONES.map(([v, t]) => <button key={v} className={'pestana' + (seccion === v ? ' activa' : '')} onClick={() => setSeccion(v)}>{t}</button>)}</div>
+      {seccion === 'usuarios' && <Usuarios />}
+      {seccion === 'privacidad' && <Privacidad />}
+      {seccion !== 'resumen' ? null : <>
       <div className="kpis">{kpis.map(([n, l]) => <div key={l} className="kpi"><span className="n">{n}</span><span className="l">{l}</span></div>)}</div>
       <div className="grid g2">
         <div className="card">
@@ -52,10 +62,11 @@ export default function Admin() {
       <div className="card">
         <div className="row between"><h3>Bitácora completa</h3><span className="muted">{bit.length} registros</span></div>
         <div className="tbl"><table>
-          <thead><tr><th>Fecha y hora</th><th>Evento</th><th>Persona</th><th>Placa</th><th>Lote</th><th>Medio</th><th>Autorizó</th><th>Foto</th><th>Sinc.</th></tr></thead>
-          <tbody>{bit.map(b => <tr key={b.id}><td>{fmtDT(b.ts)}</td><td>{b.tipo === 'ingreso' ? <span className="pill sea">Ingreso</span> : <span className="pill nv">Salida</span>}</td><td>{b.nombre}</td><td><Plate p={b.placa} /></td><td>{unidad(b.unidad_id)?.lote}</td><td>{b.medio}</td><td className="small">{b.autorizo}</td><td><Foto referencia={b.foto_url} /></td><td>{b.sincronizado === false ? <span className="pill warn">pendiente</span> : <span className="pill ok">ok</span>}</td></tr>)}</tbody>
+          <thead><tr><th>Fecha y hora</th><th>Evento</th><th>Persona</th><th>Placa</th><th>Lote</th><th>Medio</th><th>Autorizó</th><th>Vigilante</th><th>Foto</th><th>Sinc.</th></tr></thead>
+          <tbody>{bit.map(b => <tr key={b.id}><td>{fmtDT(b.ts)}</td><td>{b.tipo === 'ingreso' ? <span className="pill sea">Ingreso</span> : <span className="pill nv">Salida</span>}</td><td>{b.nombre}</td><td><Plate p={b.placa} /></td><td>{unidad(b.unidad_id)?.lote}</td><td>{b.medio}</td><td className="small">{b.autorizo}</td><td className="small">{b.vigilante}</td><td><Foto referencia={b.foto_url} /></td><td>{b.sincronizado === false ? <span className="pill warn">pendiente</span> : <span className="pill ok">ok</span>}</td></tr>)}</tbody>
         </table></div>
       </div>
+      </>}
     </main>
   );
 }

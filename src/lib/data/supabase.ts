@@ -1,9 +1,8 @@
 import type { RealtimePostgresChangesPayload, SupabaseClient } from '@supabase/supabase-js';
 import { DataProvider, type Row } from './provider';
+import { TABLAS } from '../types';
 import type { Tabla } from '../types';
 import { uid } from '../util';
-
-const TABLAS: Tabla[] = ['condominios', 'unidades', 'vehiculos', 'pases', 'eventos', 'presencia', 'solicitudes'];
 
 /** Datos en Supabase filtrados por condominio, con actualización en tiempo real. */
 export class SupabaseProvider extends DataProvider {

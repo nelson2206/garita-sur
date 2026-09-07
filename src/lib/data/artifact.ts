@@ -1,13 +1,11 @@
 import { DataProvider, type Row } from './provider';
-import type { Tabla } from '../types';
+import { TABLAS, type Tabla } from '../types';
 import { semilla } from './local';
 
 type Snap = { docs: { id: string; data(): Record<string, unknown> | undefined }[] };
 type Col = { doc(id?: string): { set(d: Record<string, unknown>): Promise<void>; delete(): Promise<void> }; onSnapshot(fn: (s: Snap) => void, err?: (e: unknown) => void): () => void };
 type Db = { collection(p: string): Col };
 declare global { interface Window { claude?: { use(name: string): Promise<unknown> } } }
-
-const TABLAS: Tabla[] = ['condominios', 'unidades', 'vehiculos', 'pases', 'eventos', 'presencia', 'solicitudes'];
 
 /** Datos compartidos entre todos los que abren la página publicada en claude.ai (demo multi-dispositivo sin Supabase). */
 export class ArtifactProvider extends DataProvider {

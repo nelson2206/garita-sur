@@ -41,6 +41,32 @@ npm run build
 
 La carpeta `dist` se publica en cualquier hosting estático (Vercel, Netlify, Cloudflare Pages). Debe servirse por HTTPS: la cámara y la instalación como app lo exigen. Configura el hosting para que toda ruta devuelva `index.html`.
 
+## Qué incluye la app
+
+**Propietario (celular)**
+- Invitaciones con QR y vigencia, y creación masiva para eventos: se pega la lista de invitados y cada uno recibe su propio código.
+- Credenciales recurrentes en tres grupos: familia frecuente, personal del hogar, y obra o contratistas con fecha de vencimiento.
+- Aprobación o rechazo de visitas no anunciadas, con aviso del navegador cuando la app está instalada.
+- Estado de cuenta, vehículos del lote y actividad del lote.
+
+**Garita (tablet)**
+- Turno con relevo: quién está de guardia, desde cuándo y qué novedades deja al siguiente.
+- Libro de ocurrencias con notas e incidentes, con hora y autor.
+- Escaneo de QR, código manual y búsqueda por placa, nombre o lote.
+- Semáforo de estado de cuenta al validar, y constancia de aviso de privacidad cuando se toma foto.
+- Aviso por WhatsApp al propietario en las visitas no anunciadas.
+- Registro sin internet con sincronización al reconectar.
+
+**Administración (web)**
+- Resumen del día, padrón con importación desde CSV y estado de cuenta por lote.
+- Usuarios: invitaciones por correo con rol y lote; la persona entra y su perfil se crea solo.
+- Privacidad: aviso al visitante, cartel de zona vigilada para imprimir y borrado de fotos vencidas.
+- Bitácora completa con el vigilante que registró cada movimiento, exportable a CSV.
+
+### Límite conocido de los avisos
+
+El aviso al propietario usa las notificaciones del navegador y solo llega con la app abierta o instalada en el dispositivo. Por eso la garita tiene siempre el botón de WhatsApp, que llega igual. Las notificaciones que llegan con la app cerrada necesitan un servidor de envío y quedan para después del piloto.
+
 ## Estructura
 
 - `src/lib/data/` capa de datos: `local.ts` (demo en el navegador) y `supabase.ts` (nube con tiempo real).

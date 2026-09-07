@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { useDatos, useSesion } from '../lib/auth';
-import type { Evento, Pase, Unidad } from '../lib/types';
-import { DIAS, fmtDT, waText } from '../lib/util';
+import type { Evento, Pase, TipoPase, Unidad } from '../lib/types';
+import { DIAS, ETIQUETA_TIPO, fmtDT, waText } from '../lib/util';
 import { Plate, toast } from '../components/ui';
-import { NuevoPase, NuevoPersonal, PaseModal } from './ResidenteForms';
+import { NuevoPase, NuevoRecurrente, PaseModal } from './ResidenteForms';
 import { Inicio } from './ResidenteInicio';
 
 export type Acciones = { onVer: (p: Pase) => void; onWa: (p: Pase) => void; onAnular: (p: Pase) => void };
@@ -27,31 +27,43 @@ export default function Residente() {
       <Routes>
         <Route index element={<Inicio unidadId={uid_} {...acciones} />} />
         <Route path="nuevo" element={<NuevoPase unidadId={uid_} onCreado={setVerPase} />} />
-        <Route path="personal" element={<Personal unidadId={uid_} pases={pases} {...acciones} onCreado={setVerPase} />} />
+        <Route path="personal" element={<Credenciales unidadId={uid_} pases={pases} {...acciones} onCreado={setVerPase} />} />
         <Route path="actividad" element={<Actividad unidadId={uid_} />} />
       </Routes>
       {verPase && <PaseModal pase={verPase} onClose={() => setVerPase(null)} />}
       <nav className="nav">
         <NavLink to="/residente" end className={cls}><span>⌂</span>Inicio</NavLink>
         <NavLink to="/residente/nuevo" className={cls}><span>+</span>Invitar</NavLink>
-        <NavLink to="/residente/personal" className={cls}><span>☺</span>Personal</NavLink>
+        <NavLink to="/residente/personal" className={cls}><span>☺</span>Credenciales</NavLink>
         <NavLink to="/residente/actividad" className={cls}><span>≡</span>Actividad</NavLink>
       </nav>
     </main>
   );
 }
 
-function Personal({ unidadId, pases, onVer, onWa, onAnular, onCreado }: { unidadId: string; pases: Pase[]; onCreado: (p: Pase) => void } & Acciones) {
-  const pers = pases.filter(x => x.tipo === 'personal' && x.estado !== 'anulado');
+const GRUPOS: [TipoPase, string, string][] = [
+  ['familiar', 'Familia frecuente', 'Hijos, padres, pareja. Entran sin que tengas que invitarlos cada vez.'],
+  ['personal', 'Personal del hogar', 'Trabajadoras del hogar, jardineros, piscineros, en los días y horas que apruebes.'],
+  ['obra', 'Obra y contratistas', 'Trabajadores de una obra, con horario y fecha de vencimiento.'],
+];
+
+function Credenciales({ unidadId, pases, onVer, onWa, onAnular, onCreado }: { unidadId: string; pases: Pase[]; onCreado: (p: Pase) => void } & Acciones) {
+  const vigentes = pases.filter(x => x.estado !== 'anulado');
   return <>
-    <div className="card"><h4>Personal recurrente</h4><p className="small">Trabajadoras del hogar, jardineros, piscineros. Entran con su QR en los días y horas que apruebes.</p>
-      {pers.length ? pers.map(x => <div key={x.id} className="item">
-        <div className="row between"><span className="t">{x.nombre}</span><span className="pill acc">{x.codigo}</span></div>
-        <span className="s">{x.rol} · {(x.dias || []).map(d => DIAS[d]).join(' ')} · {x.hora_desde} a {x.hora_hasta} · {x.usos} ingresos</span>
-        <div className="row"><button className="btn sm" onClick={() => onVer(x)}>Ver QR</button><button className="btn sm" onClick={() => onWa(x)}>WhatsApp</button><button className="btn sm ghost danger" onClick={() => onAnular(x)}>Dar de baja</button></div>
-      </div>) : <p className="muted">Sin personal registrado.</p>}
-    </div>
-    <NuevoPersonal unidadId={unidadId} onCreado={onCreado} />
+    {GRUPOS.map(([tipo, titulo, ayuda]) => {
+      const lista = vigentes.filter(x => x.tipo === tipo);
+      return <div key={tipo} className="card">
+        <div className="row between"><h4>{titulo}</h4><span className="pill sea">{lista.length}</span></div>
+        <p className="small">{ayuda}</p>
+        {lista.map(x => <div key={x.id} className="item">
+          <div className="row between"><span className="t">{x.nombre}</span><span className="pill acc">{x.codigo}</span></div>
+          <span className="s">{x.rol}{x.grupo ? ` · ${x.grupo}` : ''} · {(x.dias || []).map(d => DIAS[d]).join(' ')} · {x.hora_desde} a {x.hora_hasta} · {x.usos} ingresos{tipo === 'obra' ? ` · vence ${fmtDT(x.hasta)}` : ''}</span>
+          <div className="row"><button className="btn sm" onClick={() => onVer(x)}>Ver QR</button><button className="btn sm" onClick={() => onWa(x)}>WhatsApp</button><button className="btn sm ghost danger" onClick={() => onAnular(x)}>Dar de baja</button></div>
+        </div>)}
+        {!lista.length && <p className="muted">Sin {ETIQUETA_TIPO[tipo].toLowerCase()} registrado.</p>}
+      </div>;
+    })}
+    <NuevoRecurrente unidadId={unidadId} onCreado={onCreado} />
   </>;
 }
 

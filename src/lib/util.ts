@@ -1,4 +1,12 @@
-import type { Condominio, Pase, Unidad } from './types';
+import type { Condominio, Pase, TipoPase, Unidad } from './types';
+
+// Pases con horario recurrente: valen muchas veces dentro de sus días y horas, sin gastar cupo de ingresos.
+export const RECURRENTES: TipoPase[] = ['personal', 'familiar', 'obra'];
+export const esRecurrente = (t: TipoPase) => RECURRENTES.includes(t);
+export const ETIQUETA_TIPO: Record<TipoPase, string> = {
+  invitado: 'Invitado', proveedor: 'Proveedor o delivery', huesped: 'Huésped de alquiler',
+  personal: 'Personal del hogar', familiar: 'Familiar frecuente', obra: 'Obra o contratista',
+};
 
 export const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
 const CH = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -25,9 +33,9 @@ export function validarPase(p: Pase | undefined): { ok: boolean; msg?: string } 
   const n = new Date();
   if (n < new Date(p.desde)) return { ok: false, msg: 'Pase aún no vigente (desde ' + fmtDT(p.desde) + ')' };
   if (n > new Date(p.hasta)) return { ok: false, msg: 'Pase vencido el ' + fmtDT(p.hasta) };
-  if (p.tipo === 'personal') {
+  if (esRecurrente(p.tipo)) {
     const hm = n.toTimeString().slice(0, 5);
-    if (p.dias && !p.dias.includes(n.getDay())) return { ok: false, msg: 'Hoy no es día autorizado' };
+    if (p.dias && p.dias.length && !p.dias.includes(n.getDay())) return { ok: false, msg: 'Hoy no es día autorizado' };
     if (p.hora_desde && p.hora_hasta && (hm < p.hora_desde || hm > p.hora_hasta)) return { ok: false, msg: `Fuera de horario (${p.hora_desde} a ${p.hora_hasta})` };
   } else if (p.usos >= p.usos_max) return { ok: false, msg: 'Pase sin ingresos disponibles' };
   return { ok: true };

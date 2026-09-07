@@ -11,6 +11,7 @@ export function semilla() {
   const h = (hh: number, mm: number) => { const d = new Date(t); d.setHours(hh, mm, 0, 0); return d.toISOString(); };
   const manana = new Date(t); manana.setDate(t.getDate() + 1); manana.setHours(23, 59, 0, 0);
   const anio = new Date(t); anio.setFullYear(t.getFullYear() + 1);
+  const mes = new Date(t); mes.setMonth(t.getMonth() + 2);
   const u = (id: string, lote: string, propietario: string, tel: string, cuotas: number) => ({ id, condominio_id: cid, lote, propietario, telefono: tel, cuotas_pendientes: cuotas, cupo_vehiculos: 3 });
   const v = (id: string, unidad_id: string, placa: string, descripcion: string) => ({ id, condominio_id: cid, unidad_id, placa, descripcion });
   const lista = {
@@ -21,6 +22,18 @@ export function semilla() {
       { id: 'p1', condominio_id: cid, unidad_id: 'u12', codigo: '7QK4M2', tipo: 'invitado', nombre: 'Lucía Paredes', placa: 'AXR-560', desde: h(0, 0), hasta: manana.toISOString(), usos: 0, usos_max: 2, estado: 'activo', creado_en: h(7, 40) },
       { id: 'p2', condominio_id: cid, unidad_id: 'u3', codigo: 'M3NP8H', tipo: 'personal', nombre: 'Rosa Quispe', rol: 'Trabajadora del hogar', dias: [0, 1, 2, 3, 4, 5, 6], hora_desde: '06:00', hora_hasta: '22:00', desde: h(0, 0), hasta: anio.toISOString(), usos: 14, usos_max: 9999, estado: 'activo', creado_en: h(6, 0) },
       { id: 'p3', condominio_id: cid, unidad_id: 'u15', codigo: 'W9DL4C', tipo: 'personal', nombre: 'Julio Ccama', rol: 'Jardinero', dias: [2, 5], hora_desde: '08:00', hora_hasta: '13:00', desde: h(0, 0), hasta: anio.toISOString(), usos: 5, usos_max: 9999, estado: 'activo', creado_en: h(6, 0) },
+      { id: 'p4', condominio_id: cid, unidad_id: 'u12', codigo: 'K8TR5N', tipo: 'familiar', nombre: 'Andrea Huamán', rol: 'Hija', dias: [0, 1, 2, 3, 4, 5, 6], hora_desde: '00:00', hora_hasta: '23:59', placa: 'D7M-204', desde: h(0, 0), hasta: anio.toISOString(), usos: 31, usos_max: 9999, estado: 'activo', creado_en: h(6, 0) },
+      { id: 'p5', condominio_id: cid, unidad_id: 'u21', codigo: 'B6XW3T', tipo: 'obra', nombre: 'Maestro Ramírez', rol: 'Albañil', grupo: 'Ampliación segundo piso', dias: [1, 2, 3, 4, 5], hora_desde: '08:00', hora_hasta: '17:00', desde: h(0, 0), hasta: mes.toISOString(), usos: 9, usos_max: 9999, estado: 'activo', creado_en: h(6, 0) },
+      { id: 'p6', condominio_id: cid, unidad_id: 'u21', codigo: 'Q2JV7L', tipo: 'obra', nombre: 'Ayudante Chávez', rol: 'Ayudante', grupo: 'Ampliación segundo piso', dias: [1, 2, 3, 4, 5], hora_desde: '08:00', hora_hasta: '17:00', desde: h(0, 0), hasta: mes.toISOString(), usos: 9, usos_max: 9999, estado: 'activo', creado_en: h(6, 0) },
+    ],
+    turnos: [{ id: 't1', condominio_id: cid, vigilante: 'Vigilante turno día', inicio: h(6, 0), fin: null, notas_apertura: 'Relevo sin novedad. Chapa del portón peatonal floja.', notas_cierre: null }],
+    ocurrencias: [
+      { id: 'o1', condominio_id: cid, turno_id: 't1', ts: h(8, 20), texto: 'Camión cisterna ingresó por el portón de servicio. Se avisó a administración.', gravedad: 'nota', vigilante: 'Vigilante turno día' },
+      { id: 'o2', condominio_id: cid, turno_id: 't1', ts: h(9, 50), texto: 'Vehículo sin identificar dio dos vueltas frente a la garita y se retiró.', gravedad: 'incidente', vigilante: 'Vigilante turno día' },
+    ],
+    invitaciones: [
+      { id: 'i1', condominio_id: cid, email: 'administracion@ejemplo.pe', rol: 'admin', nombre: 'Administración', unidad_id: null, estado: 'aceptada', creado_en: h(6, 0), aceptado_en: h(6, 30) },
+      { id: 'i2', condominio_id: cid, email: 'lote21@ejemplo.pe', rol: 'residente', nombre: 'Familia Castro', unidad_id: 'u21', estado: 'pendiente', creado_en: h(7, 10), aceptado_en: null },
     ],
     eventos: [
       { id: 'e1', condominio_id: cid, unidad_id: 'u3', ts: h(7, 55), tipo: 'ingreso', nombre: 'Rosa Quispe', placa: '', medio: 'qr', autorizo: 'Credencial recurrente · Familia Salazar', sincronizado: true },

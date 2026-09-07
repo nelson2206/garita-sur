@@ -3,6 +3,7 @@ import { Offline } from '../lib/offline';
 import { registrarIngreso, registrarSalida } from '../lib/acciones';
 import type { Evento, Presencia, Solicitud, Unidad } from '../lib/types';
 import { fmtT, nowIso } from '../lib/util';
+import { telefonoUtil, waLink } from '../lib/notificaciones';
 import { Plate, toast } from '../components/ui';
 
 export function Dentro() {
@@ -23,11 +24,21 @@ export function Solicitudes() {
     await Offline.escribir(p, 'solicitudes', { ...s, estado: 'ingreso' }); toast('Ingreso registrado');
   };
   const pill = (s: Solicitud) => s.estado === 'pendiente' ? <span className="pill warn">Esperando al residente</span> : s.estado === 'aprobada' ? <span className="pill ok">Aprobada en la app</span> : s.estado === 'telefono' ? <span className="pill ok">Aprobada por teléfono</span> : s.estado === 'rechazada' ? <span className="pill bad">Rechazada</span> : <span className="pill nv">Ingresó</span>;
-  return <div className="card"><h3>Solicitudes al residente</h3><div className="list">{solic.length ? solic.map(s => <div key={s.id} className="item"><div className="row between"><span className="t">{s.nombre} <Plate p={s.placa} /></span>{pill(s)}</div><span className="s">{unidad(s.unidad_id)?.lote} · {unidad(s.unidad_id)?.propietario} · {fmtT(s.ts)}</span><div className="row">{s.estado === 'pendiente' && <button className="btn sm" onClick={() => marcarTel(s)}>Aprobó por teléfono</button>}{(s.estado === 'aprobada' || s.estado === 'telefono') && <button className="btn sm primary" onClick={() => ingreso(s)}>Registrar ingreso</button>}</div></div>) : <p className="muted">Sin solicitudes.</p>}</div></div>;
+  // Si el propietario no tiene la app abierta, el aviso seguro es WhatsApp desde la garita.
+  const avisarWa = (s: Solicitud) => {
+    const u = unidad(s.unidad_id);
+    const texto = `Garita de ${p.condominio()?.nombre ?? 'el condominio'}: ${s.nombre}${s.placa ? ` (placa ${s.placa})` : ''} pide ingresar a ${u?.lote ?? 'su lote'}${s.nota ? `. Motivo: ${s.nota}` : ''}. ¿Autoriza el ingreso?`;
+    window.open(waLink(u?.telefono, texto), '_blank');
+  };
+  return <div className="card"><h3>Solicitudes al residente</h3><div className="list">{solic.length ? solic.map(s => <div key={s.id} className="item"><div className="row between"><span className="t">{s.nombre} <Plate p={s.placa} /></span>{pill(s)}</div><span className="s">{unidad(s.unidad_id)?.lote} · {unidad(s.unidad_id)?.propietario} · {fmtT(s.ts)}</span><div className="row">{s.estado === 'pendiente' && <>
+    <button className="btn sm primary" onClick={() => avisarWa(s)}>Avisar por WhatsApp</button>
+    <button className="btn sm" onClick={() => marcarTel(s)}>Aprobó por teléfono</button>
+    {!telefonoUtil(unidad(s.unidad_id)?.telefono) && <span className="pill nv">Lote sin teléfono en el padrón</span>}
+  </>}{(s.estado === 'aprobada' || s.estado === 'telefono') && <button className="btn sm primary" onClick={() => ingreso(s)}>Registrar ingreso</button>}</div></div>) : <p className="muted">Sin solicitudes.</p>}</div></div>;
 }
 
 export function BitacoraTurno() {
   const p = useDatos();
   const bit = p.all<Evento>('eventos').sort((a, b) => b.ts.localeCompare(a.ts)).slice(0, 8);
-  return <div className="card"><h3>Bitácora del turno</h3><div className="list">{bit.map(b => <div key={b.id} className="item"><div className="row between"><span className="t">{b.tipo === 'ingreso' ? 'Ingreso' : 'Salida'} · {b.nombre} <Plate p={b.placa} /></span><span className="small">{fmtT(b.ts)} {b.sincronizado === false && <span className="pill warn">local</span>}</span></div><span className="s">{p.get<Unidad>('unidades', b.unidad_id)?.lote} · {b.medio} · {b.autorizo}</span></div>)}</div></div>;
+  return <div className="card"><h3>Bitácora del turno</h3><div className="list">{bit.map(b => <div key={b.id} className="item"><div className="row between"><span className="t">{b.tipo === 'ingreso' ? 'Ingreso' : 'Salida'} · {b.nombre} <Plate p={b.placa} /></span><span className="small">{fmtT(b.ts)} {b.sincronizado === false && <span className="pill warn">local</span>}</span></div><span className="s">{p.get<Unidad>('unidades', b.unidad_id)?.lote} · {b.medio} · {b.autorizo}{b.vigilante ? ` · registró ${b.vigilante}` : ''}</span></div>)}</div></div>;
 }

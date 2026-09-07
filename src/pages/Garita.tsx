@@ -5,6 +5,7 @@ import { toast } from '../components/ui';
 import { EscanearModal, NoAnunciadoModal, ValidarModal } from './GaritaModales';
 import { Busqueda } from './GaritaBusqueda';
 import { BitacoraTurno, Dentro, Solicitudes } from './GaritaListas';
+import { BarraTurno, Ocurrencias } from './GaritaTurno';
 
 export type ModalGarita = null | { k: 'scan' } | { k: 'validar'; codigo: string; foto: string } | { k: 'noanunciado'; unidadId?: string };
 
@@ -21,6 +22,7 @@ export default function Garita() {
         <div><span className="eyebrow">{c?.nombre}</span><h2>Garita principal</h2></div>
         <span className={'pill ' + (online ? 'ok' : 'warn')}>{online ? 'En línea' : 'Sin internet · registrando en local'}</span>
         <span className="pill nv">{Offline.cola.length ? `${Offline.cola.length} por sincronizar` : 'Todo sincronizado'}</span>
+        <BarraTurno />
         <label className="switch"><input type="checkbox" checked={Offline.forzarOffline} onChange={e => Offline.setForzar(e.target.checked)} />Simular corte de internet</label>
         <div className="row" style={{ marginLeft: 'auto' }}>
           <button className="btn primary" onClick={() => setModal({ k: 'scan' })}>Escanear QR</button>
@@ -29,7 +31,7 @@ export default function Garita() {
       </div>
       <div className="garita">
         <div className="col"><Busqueda setModal={setModal} /><Dentro /></div>
-        <div className="col"><Solicitudes /><BitacoraTurno /></div>
+        <div className="col"><Solicitudes /><Ocurrencias /><BitacoraTurno /></div>
       </div>
       {modal?.k === 'scan' && <EscanearModal onClose={() => setModal(null)} onCodigo={(codigo, foto) => setModal({ k: 'validar', codigo, foto })} />}
       {modal?.k === 'validar' && <ValidarModal codigo={modal.codigo} foto={modal.foto} onClose={() => setModal(null)} onNoAnunciado={id => setModal({ k: 'noanunciado', unidadId: id })} />}

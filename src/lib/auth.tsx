@@ -35,9 +35,15 @@ export function SesionProvider({ children }: { children: ReactNode }) {
 
   async function cargarPerfilNube(userId: string) {
     if (!supabase) return;
-    const { data, error } = await supabase.from('perfiles').select('*').eq('id', userId).maybeSingle();
+    let { data, error } = await supabase.from('perfiles').select('*').eq('id', userId).maybeSingle();
     if (error) { setError(error.message); setCargando(false); return; }
-    if (!data) { setError('Tu usuario existe pero aún no está asignado a un condominio. Pide al administrador que cree tu perfil.'); setPerfil(null); setProvider(null); setCargando(false); return; }
+    // Sin perfil: si la administración ya invitó este correo, la invitación crea el perfil.
+    if (!data) {
+      const { data: creado, error: errInv } = await supabase.rpc('aceptar_invitacion');
+      if (errInv) console.warn('invitación', errInv.message);
+      if (creado) ({ data } = await supabase.from('perfiles').select('*').eq('id', userId).maybeSingle());
+    }
+    if (!data) { setError('Tu correo aún no tiene acceso a ningún condominio. Pide a la administración que te invite desde la pantalla de Usuarios.'); setPerfil(null); setProvider(null); setCargando(false); return; }
     const p = data as Perfil;
     const prov = new SupabaseProvider(supabase, p.condominio_id);
     await prov.init();
