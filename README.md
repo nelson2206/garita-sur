@@ -24,6 +24,15 @@ Abre http://localhost:5173. Sin variables de entorno la app arranca en **modo de
 5. Arranca la app, entra con tu correo y luego crea tu perfil en la tabla `perfiles` con el uuid que aparece en **Authentication > Users** (ver ejemplos al final de `seed.sql`). El primer perfil debe ser `admin`.
 6. Opcional: activa la extensión `pg_cron` y programa `limpiar_fotos()` y `vencer_pases()` cada noche (instrucciones en `0003_servicios.sql`).
 
+## Demo pública
+
+La demo (sin backend, con datos de ejemplo que viven en cada navegador) está publicada en https://nelson2206.github.io/garita-sur/ desde la rama gh-pages.
+Para republicarla después de un cambio:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\publicar-pages.ps1
+```
+
 ## Publicar
 
 ```bash
