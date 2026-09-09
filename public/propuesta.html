@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Siete apuestas de producto y diseño para que la garita se anticipe y el propietario no necesite instalar nada: WhatsApp como app, placa por foto, pase vivo, modo cola, resumen semanal, check-in de huésped y red entre garitas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Garita Sur, siguiente salto">
+<meta property="og:description" content="Siete apuestas de producto y diseño para pasar de cuaderno digital a garita que se anticipa.">
+<meta property="og:url" content="https://nelson2206.github.io/garita-sur/propuesta.html">
+<meta property="og:image" content="https://nelson2206.github.io/garita-sur/og-propuesta.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Garita Sur, siguiente salto">
+<meta name="twitter:description" content="Siete apuestas de producto y diseño para pasar de cuaderno digital a garita que se anticipa.">
+<meta name="twitter:image" content="https://nelson2206.github.io/garita-sur/og-propuesta.png"><title>Garita Sur, siguiente salto</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{
+  --bg:#F2F3EF; --surface:#FFFFFF; --surface-2:#E9EBE4; --line:#D2D6CE;
+  --ink:#16232B; --ink-2:#4B5860; --muted:#7C878E;
+  --accent:#D9A400; --accent-ink:#5C4500; --accent-soft:#FBF0C4;
+  --sea:#1F6F78; --sea-soft:#DDEEF0;
+  --ok:#2E7D4F; --ok-soft:#DDF1E4; --warn:#B25E00; --warn-soft:#FCE9D2; --bad:#B3261E; --bad-soft:#F8DEDC;
+  --verdict-bg:#16232B; --verdict-ink:#FFFFFF; --verdict-text:#D7DDD9;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#11181D; --surface:#182228; --surface-2:#1F2B32; --line:#2E3B43;
+    --ink:#E6EAE7; --ink-2:#B6C0C5; --muted:#8A969D;
+    --accent:#F2BE2B; --accent-ink:#F7D978; --accent-soft:#3A3010;
+    --sea:#5FB7C0; --sea-soft:#153238;
+    --ok:#6CC58F; --ok-soft:#173424; --warn:#F0A04B; --warn-soft:#3B2611; --bad:#F08A82; --bad-soft:#3E1B18;
+    --verdict-bg:#1F2B32; --verdict-ink:#E6EAE7; --verdict-text:#B6C0C5;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11181D; --surface:#182228; --surface-2:#1F2B32; --line:#2E3B43;
+  --ink:#E6EAE7; --ink-2:#B6C0C5; --muted:#8A969D;
+  --accent:#F2BE2B; --accent-ink:#F7D978; --accent-soft:#3A3010;
+  --sea:#5FB7C0; --sea-soft:#153238;
+  --ok:#6CC58F; --ok-soft:#173424; --warn:#F0A04B; --warn-soft:#3B2611; --bad:#F08A82; --bad-soft:#3E1B18;
+  --verdict-bg:#1F2B32; --verdict-ink:#E6EAE7; --verdict-text:#B6C0C5;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Archivo","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-variation-settings:"wdth" 82;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.7rem;font-weight:700}
+h3{font-size:1.2rem;font-weight:700;font-variation-settings:"wdth" 90}
+h4{font-size:1rem;font-weight:700;font-variation-settings:"wdth" 95}
+p{margin:0}
+a{color:var(--sea);text-decoration-thickness:1px;text-underline-offset:2px}
+.eyebrow{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 90;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.prose{max-width:72ch}
+header{border-bottom:1px solid var(--line);background:var(--surface)}
+header .wrap{padding-top:44px;padding-bottom:36px;display:grid;gap:18px}
+.stripe{height:10px;background:repeating-linear-gradient(135deg,var(--accent) 0 18px,var(--ink) 18px 36px)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.92rem;color:var(--ink-2)}
+.meta b{color:var(--ink);font-weight:600}
+nav{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
+nav a{white-space:nowrap;font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 88;font-weight:600;font-size:.82rem;letter-spacing:.03em;color:var(--ink-2);text-decoration:none;padding:6px 10px;border-radius:4px}
+nav a:hover,nav a:focus-visible{background:var(--surface-2);color:var(--ink);outline:none}
+main .wrap{display:grid;gap:64px;padding-top:56px;padding-bottom:96px}
+section{display:grid;gap:20px}
+.sec-head{display:grid;gap:6px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 22px;display:grid;gap:10px;align-content:start}
+.card.accent{border-left:6px solid var(--accent)}
+.card.sea{border-left:6px solid var(--sea)}
+.card.bad{border-left:6px solid var(--bad)}
+ul,ol{margin:0;padding-left:1.2rem;display:grid;gap:6px}
+li::marker{color:var(--muted)}
+.tight{gap:3px}
+.verdict{background:var(--verdict-bg);color:var(--verdict-text);border-radius:8px;padding:28px clamp(18px,3vw,36px);display:grid;gap:14px}
+.verdict .eyebrow{color:var(--accent)}
+.verdict h2{color:var(--verdict-ink);font-size:1.6rem}
+.verdict p{color:var(--verdict-text);max-width:78ch}
+.pill{display:inline-block;font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 90;font-weight:600;font-size:.72rem;letter-spacing:.03em;padding:2px 7px;border-radius:3px;line-height:1.4;white-space:nowrap}
+.s{background:var(--ok-soft);color:var(--ok)}.p{background:var(--warn-soft);color:var(--warn)}.n{background:var(--bad-soft);color:var(--bad)}
+.note{font-size:.88rem;color:var(--ink-2);max-width:80ch}
+.small{font-size:.9rem}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{background:var(--surface-2);font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 88;font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+td.k{font-weight:600}
+.apuesta{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+@media (max-width:820px){.apuesta{grid-template-columns:1fr}}
+.apuesta .texto{padding:22px 24px;display:grid;gap:12px;align-content:start}
+.apuesta .demo{background:var(--surface-2);padding:22px;display:grid;place-items:center;border-left:1px solid var(--line)}
+@media (max-width:820px){.apuesta .demo{border-left:0;border-top:1px solid var(--line)}}
+.apuesta h3{font-size:1.35rem}
+.apuesta .num{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 80;font-weight:800;font-size:2.2rem;color:var(--accent);line-height:1}
+.hoy-manana{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:.9rem}
+@media (max-width:520px){.hoy-manana{grid-template-columns:1fr}}
+.hoy-manana div{padding:10px 12px;border-radius:6px;background:var(--surface-2)}
+.hoy-manana .m{background:var(--accent-soft)}
+.hoy-manana b{display:block;font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 88;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;color:var(--ink-2)}
+.ficha{display:grid;gap:4px;font-size:.88rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:10px}
+.ficha span b{color:var(--ink);font-weight:600}
+.chat{width:100%;max-width:340px;background:#E5DDD5;border-radius:18px;padding:14px;display:grid;gap:8px;font-size:.9rem;color:#111}
+.chat .b{max-width:85%;padding:8px 10px;border-radius:10px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.chat .b.yo{background:#DCF8C6;justify-self:end}
+.chat .qr{width:88px;height:88px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/16px 16px;border:6px solid #fff;border-radius:4px;margin-bottom:6px}
+.chat .hora{font-size:.7rem;color:#667;text-align:right}
+.tablet{width:100%;max-width:420px;background:#0B1014;border-radius:16px;padding:10px;color:#fff}
+.tablet .scr{background:#11181D;border-radius:10px;padding:14px;display:grid;gap:10px;min-height:250px}
+.tablet .big{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 80;font-weight:800;font-size:1.6rem;letter-spacing:.04em}
+.tablet .fila{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:#1F2B32}
+.tablet .fila.ok{border-left:8px solid #6CC58F}.tablet .fila.warn{border-left:8px solid #F0A04B}.tablet .fila.sol{border-left:8px solid #F2BE2B}
+.tablet .btn{background:#F2BE2B;color:#16232B;font-weight:800;font-family:"Archivo",sans-serif;padding:14px;border-radius:8px;text-align:center;font-size:1.1rem}
+.tablet .sub{font-size:.78rem;color:#B6C0C5}
+.pase{width:100%;max-width:320px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;font-size:.9rem}
+.pase .estado{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 85;font-weight:800;font-size:1.3rem}
+.pase .barra{height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.pase .barra i{display:block;height:100%;width:62%;background:var(--sea)}
+.pase .cta{background:var(--accent);color:#16232B;font-weight:700;padding:10px;border-radius:8px;text-align:center}
+.pase .cta.g{background:var(--surface-2);color:var(--ink)}
+.digest{width:100%;max-width:360px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:8px;font-size:.9rem}
+.digest .kp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.digest .kp div{background:var(--surface-2);border-radius:6px;padding:8px;text-align:center}
+.digest .kp b{display:block;font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 85;font-size:1.3rem;font-weight:800}
+.digest .kp span{font-size:.72rem;color:var(--ink-2)}
+.spark{display:flex;align-items:flex-end;gap:3px;height:48px}
+.spark i{flex:1;background:var(--sea);border-radius:2px 2px 0 0;opacity:.85}
+.spark i.pk{background:var(--accent)}
+.principios{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.principio{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--sea);border-radius:6px;padding:14px 16px;display:grid;gap:6px}
+.principio p{font-size:.9rem;color:var(--ink-2)}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.phase{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:8px;border-top:6px solid var(--sea)}
+.phase.now{border-top-color:var(--accent)}
+.phase .when{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 88;font-weight:700;font-size:.95rem}
+.phase ul{font-size:.9rem}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.84rem;background:var(--bg)}
+footer .wrap{padding:20px 0 40px}
+</style>
+</head>
+<body>
+
+
+<div class="stripe"></div>
+<header>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><span class="eyebrow">Propuesta de producto y diseño</span><a href="./" style="font-size:.85rem">← Ver la demo</a></div>
+    <h1>De cuaderno digital a garita que se anticipa</h1>
+    <p class="prose" style="font-size:1.12rem;color:var(--ink-2)">Revisión de la app Garita Sur tal como está hoy, y siete apuestas para que la experiencia deje de ser "llenar formularios" y pase a ser "la garita ya sabe quién viene".</p>
+    <div class="meta">
+      <span><b>Fecha</b> 8 de setiembre de 2026</span>
+      <span><b>Base</b> app en github.com/nelson2206/garita-sur y benchmark del 1 de setiembre</span>
+      <span><b>Decisión que alimenta</b> qué construir después del piloto para diferenciarse de las apps de condominio</span>
+    </div>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="#diagnostico">Diagnóstico</a><a href="#principios">Principios</a><a href="#apuestas">Siete apuestas</a><a href="#diseno">Dirección de diseño</a><a href="#modelo">Modelo de negocio</a><a href="#plan">Qué prototipar primero</a><a href="#decisiones">Decisiones</a>
+</div></nav>
+
+<main><div class="wrap">
+
+<section id="diagnostico">
+  <div class="verdict">
+    <span class="eyebrow">Lectura honesta</span>
+    <h2>La app ya cubre el circuito completo, pero todavía le pide al usuario que haga el trabajo: abrir, buscar, llenar, confirmar. Lo disruptivo no es agregar pantallas, es quitar pasos.</h2>
+    <p>Hoy el propietario abre una app, elige un tipo, escribe un nombre, pone fechas y genera un QR. El vigilante busca, valida, marca casillas, registra. Eso ya es mejor que el cuaderno, y es lo mismo que hacen las quince apps del benchmark. El salto está en tres lugares: que el propietario no necesite instalar nada, que la garita sepa quién llega antes de que llegue, y que la junta reciba decisiones, no tablas.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card accent">
+      <h3>Lo que hoy funciona bien</h3>
+      <ul class="tight">
+        <li>El vigilante sigue siendo quien decide: la app le da información y deja evidencia. Eso calza con la realidad sin barrera.</li>
+        <li>Funciona sin internet y sincroniza sola.</li>
+        <li>Cumple con la ley: sin biometría, sin bloqueo a morosos, con aviso y borrado de fotos.</li>
+        <li>El invitado no instala nada: recibe un enlace con su QR.</li>
+      </ul>
+    </div>
+    <div class="card sea">
+      <h3>Dónde sigue siendo cuaderno digital</h3>
+      <ul class="tight">
+        <li>El propietario tiene que instalar y aprender una app. En un condominio de playa muchos dueños son mayores y viven en WhatsApp.</li>
+        <li>La garita reacciona: nadie le avisa que tres autos vienen llegando por la Panamericana.</li>
+        <li>La placa se escribe a mano aunque el vigilante ya le tomó foto.</li>
+        <li>La administración ve tablas; nadie le dice "contrata un vigilante más los sábados de enero".</li>
+        <li>La pantalla del vigilante está pensada para escritorio, no para una tablet al sol con dedos mojados.</li>
+      </ul>
+    </div>
+    <div class="card bad">
+      <h3>Lo que no vale la pena perseguir</h3>
+      <ul class="tight">
+        <li>Reconocimiento facial o huella: multa demostrada y sin ventaja sobre QR.</li>
+        <li>Chat vecinal y comunicados: WhatsApp ya lo resuelve.</li>
+        <li>Lectura de placas con cámara fija: solo tiene sentido donde hay barrera, y la mayoría no la tiene.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="principios">
+  <div class="sec-head"><span class="eyebrow">1. Principios de la siguiente versión</span><h2>Cuatro reglas para decidir qué entra y qué no</h2></div>
+  <div class="principios">
+    <div class="principio"><h4>Cero instalación para el propietario</h4><p>Si algo requiere abrir una app, hay que preguntarse si se puede hacer por WhatsApp. La app queda para quien la quiera.</p></div>
+    <div class="principio"><h4>La garita se anticipa</h4><p>Todo lo que se pueda saber antes de que el auto llegue a la tranquera se muestra antes: quién viene, a qué lote, en cuántos minutos.</p></div>
+    <div class="principio"><h4>Un toque, no un formulario</h4><p>Cada acción del vigilante en hora punta se resuelve con un toque grande. Lo que necesite teclado se hace fuera de la cola.</p></div>
+    <div class="principio"><h4>Datos que deciden</h4><p>La junta no necesita una bitácora, necesita saber cuántos vigilantes contratar, qué lote genera incidentes y si la cuota alcanza.</p></div>
+  </div>
+</section>
+
+<section id="apuestas">
+  <div class="sec-head"><span class="eyebrow">2. Siete apuestas</span><h2>Ordenadas por cuánto cambian la experiencia, no por facilidad</h2></div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">01</span>
+      <h3>WhatsApp como la app del propietario</h3>
+      <p>El propietario le escribe al número del condominio como le escribiría al vigilante: "mañana viene Lucía Paredes, placa AXR-560, se queda hasta el domingo". El sistema entiende el mensaje, crea el pase y responde con el QR y el enlace para reenviar. Aprobar una visita no anunciada es responder "sí". La app sigue existiendo, pero deja de ser obligatoria.</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>Instalar, entrar con código, cuatro campos, generar, compartir.</div>
+        <div class="m"><b>Mañana</b>Un mensaje de WhatsApp. Sin instalar nada.</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> ninguna app del benchmark opera sin app. La adopción deja de depender de convencer a cada familia.</span>
+        <span><b>Cómo se hace:</b> WhatsApp Business (API de Meta) más un modelo de lenguaje que convierte el mensaje en un pase estructurado y pide lo que falte. El vigilante conserva su tablet.</span>
+        <span><b>Costo y riesgo:</b> Meta cobra por conversación iniciada por la empresa (centavos de dólar; verificar la tarifa vigente para Perú). Riesgo: mensajes ambiguos; se mitiga confirmando antes de crear el pase.</span>
+        <span><b>Esfuerzo:</b> <span class="pill p">medio</span> · requiere una cuenta verificada de Meta Business a nombre de una empresa.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="chat">
+        <div class="b yo">Mañana viene Lucía Paredes, placa AXR-560, hasta el domingo</div>
+        <div class="b">Listo. Pase para <b>Lucía Paredes</b>, Lote 12, del 9 al 13 de setiembre, placa AXR-560. ¿Lo confirmo?</div>
+        <div class="b yo">Sí</div>
+        <div class="b"><div class="qr"></div>Código <b>7QK4M2</b>. Reenvíale este mensaje a Lucía; en la garita muestra el QR o dice el código.</div>
+        <div class="hora">20:14</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">02</span>
+      <h3>Placa por foto: lectura de placas sin cámara fija ni barrera</h3>
+      <p>El vigilante ya toma una foto en cada ingreso. La tablet lee la placa de esa misma foto y la completa sola; si coincide con un vehículo del padrón, propone el lote y el propietario. Es la lectura de placas que el benchmark reservaba para condominios con barrera, con hardware cero.</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>Foto, y después escribir la placa a mano.</div>
+        <div class="m"><b>Mañana</b>Foto. La placa aparece escrita y el lote sugerido.</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> convierte el paso más lento del registro manual en un toque, y abre la puerta a "auto conocido: solo confirmar".</span>
+        <span><b>Cómo se hace:</b> reconocimiento de texto en la propia tablet, sin enviar la foto a ningún lado; en fase dos, verificación en la nube solo para placas dudosas.</span>
+        <span><b>Costo y riesgo:</b> sin costo por uso en la versión local. Riesgo: placas sucias o a contraluz; por eso propone, nunca decide, y el vigilante corrige con un toque.</span>
+        <span><b>Esfuerzo:</b> <span class="pill s">bajo a medio</span> · se puede prototipar ya sobre la app actual.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="tablet"><div class="scr">
+        <div class="sub">Foto tomada · placa leída</div>
+        <div class="big">BJK-482</div>
+        <div class="fila ok"><span>Familia Salazar · Lote 3</span><span>Al día</span></div>
+        <div class="sub">Coincide con un vehículo registrado. Toca para confirmar el ingreso.</div>
+        <div class="btn">Confirmar ingreso</div>
+        <div class="sub">¿No es esa placa? Corregir</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">03</span>
+      <h3>Pase vivo: el enlace del invitado que avisa que viene</h3>
+      <p>El enlace del pase deja de ser una imagen fija. Muestra cómo llegar a esa garita, las indicaciones del propietario ("estaciona en el lote, no en la playa"), y un botón "voy en camino" que, con permiso del invitado, le dice a la garita en cuántos minutos llega. Al ingresar, el propietario recibe "Lucía acaba de entrar". Al salir, el invitado puede calificar la atención con un toque.</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>Un QR y un código. La garita se entera cuando el auto ya está en la tranquera.</div>
+        <div class="m"><b>Mañana</b>"Tres vehículos llegan en los próximos 20 minutos": la garita se prepara y la cola del domingo baja.</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> ataca el problema real de la temporada, la cola de retorno del domingo, sin hardware. Y el invitado deja de ser un desconocido para ser alguien ya anunciado.</span>
+        <span><b>Cómo se hace:</b> el pase ya es una página; se agrega ubicación opcional, efímera y con consentimiento explícito, y la lista de llegadas en la tablet.</span>
+        <span><b>Costo y riesgo:</b> sin costo. Riesgo de privacidad: la ubicación se comparte solo si el invitado toca el botón, dura una hora y no se guarda en la bitácora.</span>
+        <span><b>Esfuerzo:</b> <span class="pill s">bajo</span> · sobre lo que ya existe.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="pase">
+        <span class="eyebrow">Tu pase · Lote 12</span>
+        <div class="estado">Llegas en 18 min</div>
+        <div class="barra"><i></i></div>
+        <p class="small">Garita principal, km 97, entrada por la Panamericana antes del grifo. Estaciona dentro del lote.</p>
+        <div class="cta">Ya estoy llegando</div>
+        <div class="cta g">Ver el QR</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">04</span>
+      <h3>Modo cola: la garita de los sábados de enero</h3>
+      <p>Cuando hay más de cinco autos esperando, la tablet cambia sola de pantalla: botones grandes, solo dos acciones (escanear o placa por foto), sin teclado, y la lista de anunciados ordenada por llegada. Lo que requiera escribir, como una visita no anunciada, pasa a un segundo carril: el vigilante le manda al visitante un enlace para que él mismo llene sus datos mientras espera.</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>La misma pantalla a las 10 de la mañana de un martes y a las 6 de la tarde de un sábado.</div>
+        <div class="m"><b>Mañana</b>Dos pantallas: una para atender, otra para operar en hora punta.</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> sería la primera app de garita diseñada alrededor del pico, que es cuando el condominio decide si la app sirve o no.</span>
+        <span><b>Cómo se hace:</b> es diseño, no infraestructura: una vista alternativa de la misma pantalla, que se activa a mano o cuando hay más de cinco anunciados en camino.</span>
+        <span><b>Esfuerzo:</b> <span class="pill s">bajo</span>.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="tablet"><div class="scr">
+        <div class="sub">Modo cola · 7 anunciados en camino</div>
+        <div class="fila sol"><span><b>Lucía Paredes</b> · Lote 12</span><span>4 min</span></div>
+        <div class="fila sol"><span><b>Familia Ríos</b> · BGD-330</span><span>9 min</span></div>
+        <div class="fila warn"><span><b>Técnico de gas</b> · Lote 7</span><span>esperando aprobación</span></div>
+        <div class="btn">Escanear</div>
+        <div class="btn" style="background:#5FB7C0">Foto de placa</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">05</span>
+      <h3>Resumen semanal que la junta lee en WhatsApp</h3>
+      <p>Cada lunes la junta recibe un mensaje: cuántos ingresos hubo, a qué hora fue el pico, cuántos incidentes, qué lotes regularizaron su cuota y una recomendación concreta. Y puede preguntarle a la bitácora en lenguaje natural: "¿cuántas veces entró la obra del lote 21 en agosto?".</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>Una tabla con cientos de filas y un botón de exportar.</div>
+        <div class="m"><b>Mañana</b>"El sábado a las 6 pm entraron 84 autos en una hora con un solo vigilante. Considera un segundo turno de 4 a 8 pm en enero."</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> convierte la bitácora en argumento para la asamblea, que es donde se aprueban cuotas y contratos de vigilancia.</span>
+        <span><b>Cómo se hace:</b> consultas ya calculables sobre los datos existentes, más un modelo de lenguaje que redacta y responde preguntas. En la página compartida de claude.ai se puede demostrar hoy mismo.</span>
+        <span><b>Costo y riesgo:</b> centavos por resumen. Riesgo: respuestas equivocadas; toda cifra se calcula en la base y el modelo solo redacta.</span>
+        <span><b>Esfuerzo:</b> <span class="pill s">bajo</span>.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="digest">
+        <span class="eyebrow">Semana del 1 al 7 de setiembre</span>
+        <div class="kp"><div><b>412</b><span>ingresos</span></div><div><b>sáb 18h</b><span>hora pico</span></div><div><b>3</b><span>incidentes</span></div></div>
+        <div class="spark"><i style="height:20%"></i><i style="height:25%"></i><i style="height:22%"></i><i style="height:30%"></i><i style="height:55%"></i><i class="pk" style="height:100%"></i><i style="height:70%"></i></div>
+        <p class="small">84 ingresos entre 5 y 7 pm del sábado con un vigilante. Recomendación: segundo turno de 4 a 8 pm los fines de semana de temporada.</p>
+        <p class="small" style="color:var(--ink-2)">2 lotes regularizaron cuota · 1 obra vence esta semana · cifras de ejemplo</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">06</span>
+      <h3>Check-in de huésped de alquiler con reglas y cobro</h3>
+      <p>El propietario que alquila su casa manda un enlace al huésped. El huésped registra a su grupo y sus placas, acepta las reglas del condominio (ruido, playa, parqueo) y, si la junta lo decidió, paga la tarifa de uso de temporada antes de que el pase se active. La garita recibe el manifiesto completo; la junta cobra sin perseguir a nadie.</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>El huésped es un invitado más, sin reglas ni cobro.</div>
+        <div class="m"><b>Mañana</b>El alquiler deja de ser un conflicto y pasa a ser un ingreso para el condominio.</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> es la única función del benchmark que genera ingresos para la junta (referencia: Proptia en EE. UU.). El alquiler por Airbnb en Asia es real y hoy nadie lo administra.</span>
+        <span><b>Cómo se hace:</b> extensión del pase vivo con formulario del grupo, aceptación de reglas y pasarela de pago (Yape, Plin, tarjeta).</span>
+        <span><b>Costo y riesgo:</b> comisión de pasarela. Riesgo legal: la junta no puede prohibir el alquiler, pero sí cobrar el uso de áreas comunes si el reglamento lo prevé.</span>
+        <span><b>Esfuerzo:</b> <span class="pill p">medio</span>.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="pase">
+        <span class="eyebrow">Check-in · Casa Lote 12</span>
+        <div class="estado">4 personas, 2 autos</div>
+        <p class="small">Del 12 al 15 de setiembre. Reglas aceptadas: silencio desde las 11 pm, parqueo dentro del lote, máximo 6 personas.</p>
+        <div class="cta">Pagar tarifa de temporada · S/ 120</div>
+        <p class="small" style="color:var(--ink-2)">El pase se activa al confirmar el pago. Monto de ejemplo; lo define la junta.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="apuesta">
+    <div class="texto">
+      <span class="num">07</span>
+      <h3>Alerta entre garitas: la red de los balnearios</h3>
+      <p>Cuando varios condominios usan el sistema, una garita puede avisar a las vecinas: "vehículo con esta placa intentó entrar con pase vencido en tres condominios hoy" o "asalto en curso en el km 115". Sin compartir datos de personas: solo placas y alertas, con consentimiento de cada junta y base legal de seguridad.</p>
+      <div class="hoy-manana">
+        <div><b>Hoy</b>Cada garita es una isla. El caso Mikonos (placas oficiales falsas) no se habría detectado.</div>
+        <div class="m"><b>Mañana</b>El valor del sistema crece con cada condominio que entra: un efecto red que ninguna app de edificio puede copiar.</div>
+      </div>
+      <div class="ficha">
+        <span><b>Por qué es disruptivo:</b> es la ventaja competitiva de largo plazo y el argumento de venta para las asociaciones de balnearios.</span>
+        <span><b>Cómo se hace:</b> lista compartida de alertas por placa, con vigencia corta, más el botón de pánico conectado a serenazgo y a las garitas vecinas.</span>
+        <span><b>Costo y riesgo:</b> sin costo técnico relevante. Riesgo legal alto si se comparte más que la placa: requiere opinión de un abogado de datos personales antes de construirlo.</span>
+        <span><b>Esfuerzo:</b> <span class="pill p">medio</span> · <span class="pill n">requiere validación legal</span>.</span>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="tablet"><div class="scr">
+        <div class="sub">Alerta de la red · hace 12 min</div>
+        <div class="big" style="color:#F08A82">M2K-118</div>
+        <div class="fila warn"><span>Intentó ingresar con pase vencido en Las Dunas y en Playa Bonita</span></div>
+        <div class="sub">Si se presenta, registra y avisa a administración. No impide el ingreso a un residente.</div>
+        <div class="btn" style="background:#F08A82">Botón de pánico</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="diseno">
+  <div class="sec-head"><span class="eyebrow">3. Dirección de diseño</span><h2>Diseñar para el sol, los dedos mojados y el propietario que no instala apps</h2></div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>Tablet de garita</h3>
+      <ul class="tight">
+        <li><b>Modo sol:</b> contraste máximo, fondo claro y tipografía condensada muy grande. Una tablet en una garita de playa se lee a pleno sol; el modo oscuro queda para la noche.</li>
+        <li><b>Zonas de toque grandes y sin gestos:</b> dedos mojados, guantes, apuro.</li>
+        <li><b>Una acción por pantalla en hora punta</b> (modo cola). Lo que requiera teclado sale de la cola.</li>
+        <li><b>Sonido y vibración</b> para pase válido, pase inválido y alerta: el vigilante no siempre mira la pantalla.</li>
+        <li><b>Turno visible siempre:</b> quién está de guardia en la esquina superior, como el nombre en el uniforme.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Celular del propietario</h3>
+      <ul class="tight">
+        <li><b>WhatsApp primero;</b> la app es la versión avanzada para quien quiera historial y credenciales.</li>
+        <li><b>De formulario a pregunta:</b> "¿A quién invitas?" con sugerencias de las últimas personas ("¿Lucía otra vez?"), no un tipo, cuatro campos y un botón.</li>
+        <li><b>Línea de tiempo del día</b> en la pantalla de inicio: quién entró, quién está, quién viene.</li>
+        <li><b>Credenciales como tarjetas</b> con foto opcional, para que la trabajadora del hogar muestre su pase como identificación, no como control.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Identidad</h3>
+      <ul class="tight">
+        <li>La franja amarilla y negra de la barrera ya es la marca; conviene llevarla a la tablet como señal de estado: amarillo atención, verde pasa, rojo detener.</li>
+        <li>Lenguaje de señalética de playa: frases cortas, imperativas y sin jerga ("Pasa", "Espera", "Llama al lote").</li>
+        <li>Nombre del contacto en WhatsApp: "Garita" a secas, como se le habla al vigilante.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="modelo">
+  <div class="sec-head"><span class="eyebrow">4. Modelo de negocio que habilitan estas apuestas</span><h2>Hoy el producto se vende por lote al mes; estas ideas abren tres fuentes más</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Fuente</th><th>Quién paga</th><th>Qué habilita</th><th>Riesgo</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Cuota por lote al mes</td><td>La junta</td><td>Lo actual. Referencia del mercado: S/ 2 a 5 por unidad en apps de administración; una garita vale más que una contabilidad.</td><td>Guerra de precios si se compara con apps de edificio.</td></tr>
+      <tr><td class="k">Tarifa de temporada por huésped</td><td>El huésped de alquiler</td><td>Apuesta 06. La junta cobra el uso de áreas comunes; el sistema retiene una comisión.</td><td>Depende del reglamento de cada condominio.</td></tr>
+      <tr><td class="k">Credencial verificada de proveedor</td><td>Gasistas, aguateros, delivery frecuentes</td><td>Un pase que vale en toda la red de condominios: entran más rápido, la garita ya los conoce.</td><td>Requiere la red (apuesta 07) para tener valor.</td></tr>
+      <tr><td class="k">Datos agregados para asociaciones</td><td>Asociaciones de balnearios y municipios</td><td>Tráfico e incidentes por zona para planificar serenazgo y vías.</td><td>Solo datos agregados; nunca personas ni placas.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Ninguna de estas cifras está validada con clientes; son hipótesis para conversar con dos o tres juntas antes de fijar precios.</p>
+</section>
+
+<section id="plan">
+  <div class="sec-head"><span class="eyebrow">5. Qué prototipar primero</span><h2>Cuatro apuestas se pueden demostrar en días sobre la app actual; una necesita una cuenta que solo tú puedes abrir</h2></div>
+  <div class="phases">
+    <div class="phase now"><span class="when">Esta semana, sin cuentas externas</span><ul><li><b>Placa por foto</b> en la tablet (apuesta 02).</li><li><b>Modo cola y modo sol</b> (apuesta 04 y diseño).</li><li><b>Pase vivo con "voy en camino"</b> (apuesta 03).</li><li><b>Copiloto de la junta</b> en la página compartida de claude.ai, preguntando a la bitácora en lenguaje natural (apuesta 05).</li></ul></div>
+    <div class="phase"><span class="when">Cuando exista la cuenta de Meta Business</span><ul><li><b>WhatsApp como app</b> (apuesta 01): primero solo crear pases y aprobar visitas; después el resto.</li><li><b>Resumen semanal</b> enviado por WhatsApp a la junta.</li></ul></div>
+    <div class="phase"><span class="when">Después del piloto, con validación</span><ul><li><b>Check-in de huésped con cobro</b> (apuesta 06): requiere pasarela y acuerdo de junta.</li><li><b>Red entre garitas</b> (apuesta 07): requiere dos o más condominios y opinión legal.</li></ul></div>
+  </div>
+  <div class="card accent">
+    <h3>Cómo se mide si fue disruptivo y no solo bonito</h3>
+    <ul class="tight">
+      <li>Porcentaje de propietarios que crean al menos un pase en la temporada: la meta del piloto era 60 %; con WhatsApp la meta razonable es 90 %.</li>
+      <li>Tiempo por ingreso en hora punta: de menos de 30 segundos a menos de 15 con placa por foto y anunciados.</li>
+      <li>Porcentaje de ingresos anunciados antes de llegar a la tranquera.</li>
+      <li>Una decisión de la junta tomada con el resumen semanal (turnos, cuota, contrato de vigilancia).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="decisiones">
+  <div class="sec-head"><span class="eyebrow">6. Decisiones que te pido</span><h2>Tres preguntas para elegir el camino</h2></div>
+  <div class="grid-3">
+    <div class="card"><h3>¿WhatsApp como puerta principal?</h3><p class="small">Es la apuesta de mayor impacto y la única que necesita una cuenta de Meta Business a nombre de una empresa. Si la respuesta es sí, conviene abrirla ya: la verificación puede tardar semanas.</p></div>
+    <div class="card"><h3>¿Empezamos por la garita o por el propietario?</h3><p class="small">Placa por foto y modo cola mejoran la garita en días. Pase vivo mejora al propietario y al invitado. Mi recomendación: garita primero, porque es donde el condominio ve el resultado el primer sábado.</p></div>
+    <div class="card"><h3>¿Cobro a huéspedes en el piloto?</h3><p class="small">Es la única fuente de ingreso nueva a corto plazo, pero necesita un acuerdo de junta. Conviene preguntarlo en las reuniones de validación antes de construirlo.</p></div>
+  </div>
+</section>
+
+</div></main>
+<footer><div class="wrap">Propuesta elaborada el 8 de setiembre de 2026 sobre la app Garita Sur y el benchmark del 1 de setiembre. Los montos y porcentajes son hipótesis de trabajo, no cifras validadas; las pantallas son bocetos, no diseño final.</div></footer>
+
+</body>
+</html>
